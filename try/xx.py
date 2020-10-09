@@ -6,7 +6,7 @@ import time
 import csv
 import os
 
-ROOTPATH = os.path.abspath('.')
+ROOTPATH = os.path.abspath('..')
 plt.style.use('fivethirtyeight')
 
 x=[]

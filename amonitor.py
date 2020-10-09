@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from MatplotlibWidget import MatplotlibWidget
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -18,12 +18,15 @@ class Ui_Form(object):
         self.pakagename = QtWidgets.QLabel(Form)
         self.pakagename.setGeometry(QtCore.QRect(30, 30, 60, 16))
         self.pakagename.setObjectName("pakagename")
+
         self.packege_name = QtWidgets.QLineEdit(Form)
         self.packege_name.setGeometry(QtCore.QRect(90, 30, 131, 21))
         self.packege_name.setObjectName("packege_name")
+
         self.updateetime = QtWidgets.QLabel(Form)
         self.updateetime.setGeometry(QtCore.QRect(260, 30, 60, 16))
         self.updateetime.setObjectName("updateetime")
+
         self.update_time = QtWidgets.QLineEdit(Form)
         self.update_time.setGeometry(QtCore.QRect(330, 30, 81, 21))
         self.update_time.setObjectName("update_time")
@@ -39,7 +42,9 @@ class Ui_Form(object):
         self.graph = QtWidgets.QLabel(Form)
         self.graph.setGeometry(QtCore.QRect(20, 190, 60, 16))
         self.graph.setObjectName("graph")
-        self.graph_photo = QtWidgets.QGraphicsView(Form)
+
+        #self.graph_photo = QtWidgets.QGraphicsView(Form)
+        self.graph_photo = MatplotlibWidget(Form)
         self.graph_photo.setGeometry(QtCore.QRect(70, 150, 381, 201))
         self.graph_photo.setObjectName("graph_photo")
 

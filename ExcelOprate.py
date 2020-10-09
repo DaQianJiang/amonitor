@@ -4,13 +4,14 @@ import os
 import random
 import time
 import csv
+from xlutils.copy import copy
 
 
-ROOTPATH = os.path.abspath('.')
+ROOTPATH = os.path.abspath('')
 Excel_Path = os.path.join("monitor.xls")
 
 class excelOprate(object):
-    #将数据存入Excel中
+    #将数据存入Excel中,将列表数据写入Excel
     def save_data(self,sheet_name,value):
         #创建一个Excel对象
         excelfile = xlwt.Workbook()
@@ -24,10 +25,24 @@ class excelOprate(object):
         excelfile.save(Excel_Path)
         print("excel 数据写入成功")
 
+
     def read_exceldata(self,sheet_name):
         file = xlrd.open_workbook(Excel_Path,sheet_name)
         table_data = file.sheet_by_name(sheet_name)
         return table_data
+
+    def add_data(self,sheet_name,value):
+        rows = self.read_exceldata(sheet_name).nrows
+        cols = self.read_exceldata(sheet_name).ncols
+        self.file = xlrd.open_workbook(Excel_Path,sheet_name)
+        self.data_copy = copy(self.file)
+        self.sheet = self.data_copy.get_sheet(sheet=sheet_name)
+        self.sheet.write(rows,0,value[0][0])  # 在某一单元格写入value
+        self.sheet.write(rows,1,value[0][1])
+        self.data_copy.save(Excel_Path)  # 保存文件
+        print("数据追加成功")
+
+
 
 ####CSV##########
     def write_data(self):
@@ -39,6 +54,7 @@ class excelOprate(object):
                 writer = csv.writer(file)
                 writer.writerow((x,y))
             time.sleep(2)
+
     def read_csv(self):
         with open(os.path.join(ROOTPATH,'example.txt'),'r') as files:
             reader = csv.reader(files)
